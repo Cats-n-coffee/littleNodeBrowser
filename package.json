@@ -1,11 +1,25 @@
 {
   "name": "littlenodebrowser",
   "version": "1.0.0",
+  "private": true,
   "description": "A very simple brwoser with Nodejs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "webpack --mode production",
+    "start": "webpack && qode ./dist/index.js"
   },
   "author": "Lucie A.",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "@nodegui/nodegui": "^0.35.0",
+    "axios": "^0.21.1"
+  },
+  "devDependencies": {
+    "@nodegui/packer": "^1.4.1",
+    "clean-webpack-plugin": "^4.0.0-alpha.0",
+    "file-loader": "^6.2.0",
+    "native-addon-loader": "^2.0.1",
+    "webpack": "^5.48.0",
+    "webpack-cli": "^4.7.2"
+  }
 }
