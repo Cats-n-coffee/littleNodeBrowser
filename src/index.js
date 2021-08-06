@@ -7,11 +7,25 @@ import {
     QLineEdit, 
     QPlainTextEdit } from "@nodegui/nodegui";
 import axios from "axios";
+const htmlparser2 = require("htmlparser2");
 
 async function fetchWebPage(url) {
-    const { data } = await axios.get(url)
-    console.log(data)
-    return data;
+    try {
+        const { data } = await axios.get(url, 
+        //     {
+        //     headers: {
+        //         'Accept': 'text/html',
+        //         'Host': '127.0.0.1',
+        //         'Connection': 'Keep-Alive',
+        //     }
+        // }
+        )
+        console.log(data)
+        return data;
+    }
+    catch (err) {
+        console.log('error fetching resource', err)
+    }
 }
 
 async function main() {
@@ -24,8 +38,6 @@ async function main() {
     centralWidget.setObjectName("myroot");
     centralWidget.setLayout(centralLayout);
 
-    //const { data } = await axios.get("http://www.example.com/")
-    //console.log(typeof data)
 // ---------------------------------- URL BAR ----------------------------------
     const urlBar = new QWidget();
     const urlBarLayout = new FlexLayout();
@@ -56,8 +68,10 @@ async function main() {
     searchButton.addEventListener('clicked', async () => {
         const enteredUrl = inputBox.text();
         const response = await fetchWebPage(enteredUrl)
-        console.log(response)
 
+        const dom = htmlparser2.parseDocument(response);
+        //console.log('DOM IS', dom);
+        console.log(dom.children[2].children[3].children[1].children[1].children)
         pageDisplay.setPlainText(response);
     })
 

@@ -13,7 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "@nodegui/nodegui": "^0.35.0",
-    "axios": "^0.21.1"
+    "axios": "^0.21.1",
+    "htmlparser2": "^6.1.0"
   },
   "devDependencies": {
     "@nodegui/packer": "^1.4.1",
